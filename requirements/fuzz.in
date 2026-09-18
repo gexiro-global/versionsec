@@ -2,4 +2,4 @@
 # harnesses import versionsec.
 -r runtime.in
 atheris==2.3.0
-hypothesis==6.145.1
+hypothesis==6.168.0
