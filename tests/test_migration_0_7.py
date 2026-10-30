@@ -155,7 +155,7 @@ def test_help_documents_canonical_env_var():
     assert "VERSIONSEC_TOKEN" in result.output
 
 
-def test_runner_review_still_works_after_rebrand(tmp_path):
+def test_runner_review_still_works_after_rebrand(tmp_path, fresh_runner_snapshot):
     out = tmp_path / "runner_report"
     result = RUNNER.invoke(
         app,
@@ -163,7 +163,7 @@ def test_runner_review_still_works_after_rebrand(tmp_path):
             "runner",
             "review",
             "--snapshot",
-            str(ROOT / "examples" / "forgejo-runner-snapshot.json"),
+            str(fresh_runner_snapshot("forgejo-runner-snapshot.json")),
             "--format",
             "md,json,sarif",
             "--out",

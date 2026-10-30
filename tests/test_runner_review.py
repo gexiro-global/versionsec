@@ -258,7 +258,7 @@ def test_provider_separation_gitea_vs_forgejo_distinct_sources():
     assert g_refs != f_refs
 
 
-def test_cli_runner_review_md_and_json_and_sarif(tmp_path):
+def test_cli_runner_review_md_and_json_and_sarif(tmp_path, fresh_runner_snapshot):
     out = tmp_path / "runner_report"
     runner = CliRunner()
     result = runner.invoke(
@@ -267,7 +267,7 @@ def test_cli_runner_review_md_and_json_and_sarif(tmp_path):
             "runner",
             "review",
             "--snapshot",
-            "examples/forgejo-runner-snapshot.json",
+            str(fresh_runner_snapshot("forgejo-runner-snapshot.json")),
             "--format",
             "md,json,sarif",
             "--out",
