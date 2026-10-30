@@ -109,9 +109,11 @@ RUNNER_FIXTURES = ("gitea-runner-snapshot.json", "forgejo-runner-snapshot.json")
 
 @pytest.mark.parametrize("script", [CANONICAL, LEGACY])
 @pytest.mark.parametrize("fixture", RUNNER_FIXTURES)
-def test_runner_review_smoke_from_installed_script(script: str, fixture: str) -> None:
+def test_runner_review_smoke_from_installed_script(
+    script: str, fixture: str, fresh_runner_snapshot
+) -> None:
     """Deterministic offline runner review end to end through the installed entrypoint."""
-    snapshot = Path(__file__).resolve().parent.parent / "examples" / fixture
+    snapshot = fresh_runner_snapshot(fixture)
     result = _run(
         script, "runner", "review", "--snapshot", str(snapshot), "--format", "json"
     )
